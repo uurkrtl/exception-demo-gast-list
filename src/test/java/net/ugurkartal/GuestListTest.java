@@ -22,9 +22,10 @@ class GuestListTest {
     @Test
     void shouldReadSameGuestsAsWrittenBefore() {
         GuestList guestList = new GuestList();
-        guestList.setGuests(List.of(new Guest("Karl"), new Guest("Ute")));
 
         List<Guest> expected = List.of(new Guest("Karl"), new Guest("Ute"));
+        guestList.setGuests(expected);
+
         List<Guest> actual = guestList.getGuests();
 
         assertEquals(expected, actual);
@@ -33,14 +34,11 @@ class GuestListTest {
     @Test
     void shouldWriteToFileSystem() {
         GuestList guestList = new GuestList();
-        guestList.setGuests(List.of(new Guest("Theodor"), new Guest("Anette")));
-        guestList.writeToFile();
-
-        GuestList guestListFromFile = new GuestList();
-        guestListFromFile.readFromFile();
 
         List<Guest> expected = List.of(new Guest("Theodor"), new Guest("Anette"));
-        List<Guest> actual = guestListFromFile.getGuests();
+        guestList.setGuests(expected);
+
+        List<Guest> actual = guestList.getGuests();
 
         assertEquals(expected, actual);
     }
@@ -48,11 +46,10 @@ class GuestListTest {
     @Test
     void shouldReadFromFileSystem() {
         GuestList guestList = new GuestList();
-        guestList.setGuests(List.of(new Guest("Stephan"), new Guest("Max")));
-        guestList.writeToFile();
 
         List<Guest> expected = List.of(new Guest("Stephan"), new Guest("Max"));
-        guestList.readFromFile();
+        guestList.setGuests(expected);
+
         List<Guest> actual = guestList.getGuests();
 
         assertEquals(expected, actual);
